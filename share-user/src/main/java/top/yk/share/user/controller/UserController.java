@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import top.yk.share.common.resp.CommonResp;
 import top.yk.share.user.domain.dao.LoginDTO;
 import top.yk.share.user.domain.entity.User;
+import top.yk.share.user.domain.resp.UserLoginResp;
 import top.yk.share.user.service.UserService;
 
 @RestController
@@ -23,10 +24,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public CommonResp<User> login(@Valid  @RequestBody LoginDTO loginDTO) {
-        User user = userService.login(loginDTO);
-        CommonResp<User> commonResp = new CommonResp<>();
-        commonResp.setData(user);
+    public CommonResp<UserLoginResp> login(@Valid  @RequestBody LoginDTO loginDTO) {
+        UserLoginResp userLoginResp = userService.login(loginDTO);
+        CommonResp<UserLoginResp> commonResp = new CommonResp<>();
+        commonResp.setData(userLoginResp);
         return commonResp;
     }
     @PostMapping("/register")
