@@ -10,6 +10,5 @@ POST http://localhost:8001/user-service/user/login
 Content-Type: application/json
 
 {
-  "phone": "1395190517",
   "password": "123121"
 }

@@ -4,6 +4,7 @@ package top.yk.share.common.handler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.validation.BindException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import top.yk.share.common.exception.BusinessException;
@@ -31,6 +32,16 @@ public class ControllerExceptionHandler {
         log.error("系统异常",e);
         commonResp.setSuccess(false);
         commonResp.setMessage(e.getE().getDesc());
+        return commonResp;
+    }
+
+    @ExceptionHandler(value = BindException.class)
+    @ResponseBody
+    public CommonResp<?> exceptionHandler(BindException e) {
+        CommonResp<?> commonResp = new CommonResp<>();
+        log.error("系统异常:{}",e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
+        commonResp.setSuccess(false);
+        commonResp.setMessage(e.getBindingResult().getAllErrors().get(0).getDefaultMessage());
         return commonResp;
     }
 }
