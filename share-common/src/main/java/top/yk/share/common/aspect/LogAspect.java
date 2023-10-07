@@ -1,4 +1,4 @@
-package top.yk.share.user.aspect;
+package top.yk.share.common.aspect;
 
 import cn.hutool.core.util.RandomUtil;
 import com.alibaba.fastjson.JSONObject;
