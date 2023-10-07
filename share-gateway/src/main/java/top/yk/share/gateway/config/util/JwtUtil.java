@@ -1,4 +1,4 @@
-package top.yk.share.common.util;
+package top.yk.share.gateway.config.util;
 
 import cn.hutool.core.date.DateField;
 import cn.hutool.core.date.DateTime;
