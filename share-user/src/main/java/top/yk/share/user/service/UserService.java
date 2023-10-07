@@ -11,6 +11,7 @@ import jakarta.servlet.http.PushBuilder;
 import org.springframework.stereotype.Service;
 import top.yk.share.common.exception.BusinessException;
 import top.yk.share.common.exception.BusinessExceptionEnum;
+import top.yk.share.common.util.JwtUtil;
 import top.yk.share.common.util.SnowUtil;
 import top.yk.share.user.domain.dao.LoginDTO;
 import top.yk.share.user.domain.entity.User;
@@ -47,10 +48,10 @@ public class UserService {
         UserLoginResp userLoginResp = UserLoginResp.builder()
                 .user(userDB)
                 .build();
-        String key = "infinityX7";
-        Map<String, Object> map = BeanUtil.beanToMap(userLoginResp);
-        String token = JWTUtil.createToken(map, key.getBytes());
-//        String token = JwtUtil.createToken(userLoginResp.getUser().getId(), userLoginResp.getUser().getPhone());
+//        String key = "infinityX7";
+//        Map<String, Object> map = BeanUtil.beanToMap(userLoginResp);
+//        String token = JWTUtil.createToken(map, key.getBytes());
+        String token = JwtUtil.createToken(userLoginResp.getUser().getId(), userLoginResp.getUser().getPhone());
         userLoginResp.setToken(token);
         return userLoginResp;
 
