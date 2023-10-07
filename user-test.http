@@ -1,4 +1,0 @@
-GET http://localhost:8001/user-service/hello
-Accept: application/json
-
-###
