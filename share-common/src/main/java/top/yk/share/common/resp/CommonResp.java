@@ -15,5 +15,5 @@ public class CommonResp<T> {
     /*业务成功或失败*/
     private Boolean success = true;
     private String message;
-    private T date;
+    private T data;
 }

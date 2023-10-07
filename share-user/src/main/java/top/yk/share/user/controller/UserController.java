@@ -18,7 +18,7 @@ public class UserController {
     public CommonResp<Long> count(){
        Long count = userService.count();
        CommonResp<Long> commonResp = new CommonResp<>();
-       commonResp.setDate(count);
+       commonResp.setData(count);
         return commonResp;
     }
 
@@ -26,7 +26,14 @@ public class UserController {
     public CommonResp<User> login(@Valid  @RequestBody LoginDTO loginDTO) {
         User user = userService.login(loginDTO);
         CommonResp<User> commonResp = new CommonResp<>();
-        commonResp.setDate(user);
+        commonResp.setData(user);
+        return commonResp;
+    }
+    @PostMapping("/register")
+    public CommonResp<Long> register(@Valid @RequestBody LoginDTO loginDTO){
+        Long id = userService.register(loginDTO);
+        CommonResp<Long> commonResp = new CommonResp<>();
+        commonResp.setData(id);
         return commonResp;
     }
 }
