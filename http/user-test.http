@@ -2,10 +2,12 @@
 #Accept: application/json
 #token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY2ODU2NDIsInBob25lIjoiMTM5NTE5MDUxNzEiLCJpZCI6MSwiZXhwIjoxNjk2Nzg1NjQyLCJpYXQiOjE2OTY2ODU2NDJ9.-xHqVJ3DYMG1f1vW_MOT9nbzv-kG4TyA-dCAvVoqh9k
 
-GET http://localhost:8000/user-service/user/count
-Accept: application/json
-token: {{token}}
+#GET http://localhost:8000/user-service/user/count
+#Accept: application/json
+#token: {{token}}
 
+GET http://localhost:8000/content-service/share/notice
+Accept: application/json
 
 ###
 
