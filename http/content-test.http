@@ -1,4 +1,8 @@
-GET http://localhost:8000/content-service/share/list
+#GET http://localhost:8000/content-service/share/list
+#Accept: application/json
+#token: {{token}}
+
+GET http://localhost:8000/content-service/share/1
 Accept: application/json
 token: {{token}}
 

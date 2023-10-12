@@ -15,6 +15,8 @@ import java.util.Date;
 public class Share {
     private Long id;
 
+    private Long userId;
+
     private String title;
 
     private Boolean isOriginal;
@@ -41,4 +43,5 @@ public class Share {
     private Date createTime;
     @JsonFormat(locale = "zh",timezone = "OMT+8",pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updateTime;
+
 }

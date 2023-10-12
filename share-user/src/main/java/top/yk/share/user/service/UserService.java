@@ -30,6 +30,9 @@ public class UserService {
         return userMapper.selectCount(null);
     }
 
+    public User findById(Long userId){
+        return userMapper.selectById(userId);
+    }
     public UserLoginResp login(LoginDTO loginDTO) {
         //根据手机号查询用户
         User userDB = userMapper.selectOne(new QueryWrapper<User>().lambda().eq(User::getPhone,loginDTO.getPhone()));

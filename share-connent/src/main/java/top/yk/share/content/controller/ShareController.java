@@ -8,6 +8,7 @@ import top.yk.share.common.resp.CommonResp;
 import top.yk.share.common.util.JwtUtil;
 import top.yk.share.content.domain.entity.Notice;
 import top.yk.share.content.domain.entity.Share;
+import top.yk.share.content.domain.resp.ShareResp;
 import top.yk.share.content.service.NoticeService;
 import top.yk.share.content.service.ShareService;
 
@@ -62,5 +63,12 @@ public class ShareController {
             log.info("没有 token");
         }
         return userId;
+    }
+    @GetMapping("/{id}")
+    public CommonResp<ShareResp> getShareById(@PathVariable Long id){
+        ShareResp shareResp = shareService.findById(id);
+        CommonResp<ShareResp> commonResp = new CommonResp<>();
+        commonResp.setData(shareResp);
+        return commonResp;
     }
 }

@@ -6,8 +6,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+import top.yk.share.common.resp.CommonResp;
 import top.yk.share.content.domain.entity.MidUserShare;
 import top.yk.share.content.domain.entity.Share;
+import top.yk.share.content.domain.resp.ShareResp;
+import top.yk.share.content.feign.User;
+import top.yk.share.content.feign.UserService;
 import top.yk.share.content.mapper.MidUserShareMapper;
 import top.yk.share.content.mapper.ShareMapper;
 
@@ -25,6 +29,9 @@ public class ShareService {
 
     @Resource
     private ShareMapper shareMapper;
+
+    @Resource
+    private UserService userService;
 
     public List<Share> getList(String title,Integer pageNo,Integer pageSize, Long userId) {
         // 构造查询条件
@@ -62,5 +69,11 @@ public class ShareService {
             }).collect(Collectors.toList());
         }
         return sharesDeal;
+    }
+
+    public ShareResp findById(Long shareId) {
+        Share share = shareMapper.selectById(shareId);
+        CommonResp<User> commonResp = userService.getUser(share.getUserId());
+        return ShareResp.builder().share(share).nickname(commonResp.getData().getNickname()).avatarUrl(commonResp.getData().getAvatarUrl()).build();
     }
 }
