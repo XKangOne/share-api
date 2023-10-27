@@ -2,9 +2,56 @@
 #Accept: application/json
 #token: {{token}}
 
-GET http://localhost:8000/content-service/share/1
+#GET http://localhost:8000/content-service/share/1
+#Accept: application/json
+#token: {{token}}
+
+GET http://localhost:8000/content-service/share/list?title=并发编程
+Accept: application/json
+
+#POST http://localhost:8000/content-service/share/exchange
+#content-type: application/json
+#Accept: application/json
+#token: {{token}}
+#
+#{
+#  "userId": 2,
+#  "shareId": 22
+#}
+
+#POST http://localhost:8000/content-service/share/contribute
+#content-type: application/json
+#Accept: application/json
+#token: {{token}}
+#
+#{
+#  "userId":1,
+#  "author":"尤雨溪",
+#  "title":"详解Vue.js",
+#  "isOriginal":1,
+#  "price":20,
+#  "downloadUrl":"https://cn.vueis.org/",
+#  "cover":"https://encrypted-tbne.qstatic.com/images?g=tbn:ANd9GcRZyUwLdHZ-byVRLhSMprxrrqwMme3rbmy9EA&usap=CAU",
+#  "summary":"详解Vue.js详解Vue.js详解Vue.js详解Vue.js详解Vue.js详解Vue.js"
+#}
+
+#GET http://localhost:8000/content-service/share/my-contribute?pageNo=2&pageSize=2
+#content-type: application/json
+#Accept: application/json
+#token: {{token}}
+
+GET http://localhost:8000/content-service/share/admin/list
 Accept: application/json
 token: {{token}}
 
-#GET http://localhost:8000/content-service/share/list?title=并发编程
-#Accept: application/json
+POST http://localhost:8000/content-service/share/admin/audit/1712716643454664706
+content-type: application/json
+Accept: application/json
+token: {{token}}
+
+{
+  "auditStatusEnum": "PASS",
+  "reason": "通过审核",
+  "showFlag": true
+}
+

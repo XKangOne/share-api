@@ -8,23 +8,56 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.conditions.query.QueryChainWrapper;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.PushBuilder;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import top.yk.share.common.exception.BusinessException;
 import top.yk.share.common.exception.BusinessExceptionEnum;
 import top.yk.share.common.util.JwtUtil;
 import top.yk.share.common.util.SnowUtil;
 import top.yk.share.user.domain.dao.LoginDTO;
+import top.yk.share.user.domain.dao.UserAddBonusMsgDTO;
+import top.yk.share.user.domain.entity.BonusEventLog;
 import top.yk.share.user.domain.entity.User;
 import top.yk.share.user.domain.resp.UserLoginResp;
+import top.yk.share.user.mapper.BonusEventLogMapper;
 import top.yk.share.user.mapper.UserMapper;
 
 import java.util.Date;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class UserService {
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private BonusEventLogMapper bonusEventLogMapper;
+
+    @Transactional(rollbackFor = Exception.class)
+    public void updateBonus(UserAddBonusMsgDTO userAddBonusMsgDTO) {
+        System.out.println(userAddBonusMsgDTO);
+        //1.为用户修改积分
+        Long userId = userAddBonusMsgDTO.getUserId();
+        Integer bonus = userAddBonusMsgDTO.getBonus();
+        User user = userMapper.selectById(userId);
+        user.setBonus(user.getBonus() + bonus);
+        userMapper.update(user, new QueryWrapper<User>().lambda().eq(User::getId, userId));
+
+        //2,记录日志到bonus_event_log表里
+        bonusEventLogMapper.insert(
+                BonusEventLog.builder()
+                        .userId(userId)
+                        .value(bonus)
+                        .description(userAddBonusMsgDTO.getDescription())
+                        .event(userAddBonusMsgDTO.getEvent())
+                        .createTime(new Date())
+                        .build()
+        );
+        log.info("积分添加完毕....");
+    }
 
     public Long count(){
         return userMapper.selectCount(null);

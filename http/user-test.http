@@ -2,15 +2,15 @@
 #Accept: application/json
 #token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYmYiOjE2OTY2ODU2NDIsInBob25lIjoiMTM5NTE5MDUxNzEiLCJpZCI6MSwiZXhwIjoxNjk2Nzg1NjQyLCJpYXQiOjE2OTY2ODU2NDJ9.-xHqVJ3DYMG1f1vW_MOT9nbzv-kG4TyA-dCAvVoqh9k
 
-GET http://localhost:8000/user-service/user/count
-Accept: application/json
-token: {{token}}
+#GET http://localhost:8000/user-service/user/count
+#Accept: application/json
+#token: {{token}}
 
 #GET http://localhost:8000/content-service/share/notice
 #Accept: application/json
 
-#GET http://localhost:8000/content-service/share/list
-#Accept: application/json
+GET http://localhost:8000/content-service/share/list
+Accept: application/json
 
 
 ###
@@ -29,3 +29,13 @@ Content-Type: application/json
 > {%
     client.global.set("token", response.body.data.token);
 %}
+###
+
+#PUT http://localhost:8000/user-service/user/update-bonus
+#content-type:application/json
+#token: {{token}}
+#
+#{
+#  "userId": 1,
+#  "bonus": -11
+#}

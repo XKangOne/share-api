@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: content-service
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        namespace: dev
+        file-extension: yml
+        auto-refresh: true
+        bootstrap:
+          enable: true
+      discovery:
+        namespace: dev
